@@ -21,10 +21,10 @@ function retweet() {
                 }
             })
         } else {
-            console.error("ERROR:",error);
+            console.error("ERROR:", error);
         }
     })
 }
 
 retweet();
-setInterval(retweet, 100000);
+setInterval(retweet, 1000 * 60 * 30);
