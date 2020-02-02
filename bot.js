@@ -1,6 +1,7 @@
 "use strict"
 const Twit = require('twit');
 const config = require('./config.js');
+const dateTime = require('node-datetime');
 const Twitter = new Twit(config);
 
 const params = {
@@ -9,15 +10,20 @@ const params = {
     lang: 'en'
 }
 
+let noOfTweets = 0;
 function retweet() {
     Twitter.get('search/tweets', params, function (error, data) {
         if (!error) {
             const tweets = data.statuses[0].id_str;
+            const dt = dateTime.create();
+            const format = dt.format('Y-m-d H:M:S');
             Twitter.post('statuses/retweet', { id: tweets }, function (error, data) {
                 if (!error) {
-                    console.log("Retweet Successful");
+                    noOfTweets++;
+                    console.log("Retweet successful on  " + format);
+                    console.log("Total number of tweets = " + noOfTweets);
                 } else {
-                    console.error("ERROR: ", error);
+                    console.error(error + " at " + format);
                 }
             })
         } else {
@@ -27,4 +33,4 @@ function retweet() {
 }
 
 retweet();
-setInterval(retweet, 1000 * 60 * 30);
+setInterval(retweet, 90000*10);
