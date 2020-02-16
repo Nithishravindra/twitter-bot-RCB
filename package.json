@@ -1,6 +1,6 @@
 {
   "name": "bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Retweets every rcb mentions on twitter",
   "main": "bot.js",
   "scripts": {
